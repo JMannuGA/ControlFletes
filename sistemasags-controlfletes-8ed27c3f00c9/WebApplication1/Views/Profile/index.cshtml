@@ -1,0 +1,131 @@
+﻿@using System.Web.Optimization;
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@{
+    ViewBag.Title = "Profile";
+}
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    @section css{
+        @Styles.Render("~/Assets/profilecss")
+    }
+
+    <style>
+        .card-profile-image {
+            position: relative;
+            margin-top: -50px;
+            margin-bottom: 10px; /* Reducido un poco el margen inferior */
+            text-align: center;
+        }
+
+            .card-profile-image img {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                border: 3px solid white;
+            }
+
+        .card-profile .text-center h3 {
+            margin-top: 10px; /* Ajuste para reducir la distancia entre la imagen y el nombre */
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="main-content">
+        <br /><br /><br /><br /><br /><br />
+        <div class="container-fluid mt--7">
+            <div class="row">
+                <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+                    <div class="card card-profile shadow">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-3 order-lg-2">
+                                <div class="card-profile-image">
+                                    <a href="#">
+                                        <img src="@Url.Content("~/Content/img/undraw_profile.svg")" class="rounded-circle">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"></div>
+                        <div class="card-body pt-0 pt-md-4">
+                            <div class="text-center">
+                                <h3 id="userName"></h3> <!-- Ajusta el nombre dinámico aquí -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-8 order-xl-1">
+                    <div class="card bg-secondary shadow">
+                        <div class="card-header bg-white border-0">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="mb-0">Mi cuenta</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <h6 class="heading-small text-muted mb-4">Informacion de usuario</h6>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-username">Nombre</label>
+                                                <input type="text" id="input-username" class="form-control form-control-alternative" value="@ViewBag.Nombre" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-first-name">Apellido Paterno</label>
+                                                <input type="text" id="input-first-name" class="form-control form-control-alternative" value="@ViewBag.ApellidoPaterno" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-last-name">Apellido Materno</label>
+                                                <input type="text" id="input-last-name" class="form-control form-control-alternative" value="@ViewBag.ApellidoMaterno" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-email">Correo Electronico</label>
+                                                <input type="email" id="input-email" class="form-control form-control-alternative" value="@ViewBag.Correo" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-phone">Teléfono</label>
+                                                <input type="text" id="input-phone" class="form-control form-control-alternative" value="@ViewBag.Telefono" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-role">Rol</label>
+                                                <input type="text" id="input-role" class="form-control form-control-alternative" readonly>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section js{
+        @Scripts.Render("~/Assets/profilejs")
+    }
+
+</body>
+</html>
+

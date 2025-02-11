@@ -1,0 +1,163 @@
+.modal-title {
+    width:94%;
+    position:absolute; 
+    font-weight: bold !important;
+    color: white;
+}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Raleway:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+
+
+* {
+    /*font-family: 'Raleway', sans-serif;*/
+    font-family: 'Poppins', sans-serif;
+}
+
+/* centrar formularios en un div */
+.login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Animacion botones pop cuando cursor pasa por ellos */
+.login2-background {
+    background-image: url('../img/pexels-josh-sorenson-103601.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: lightblue;
+
+.modal-footer{ 
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    width: 100%; 
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.campo {
+    padding: 10px; 
+    width: 100%; 
+}
+
+    .login2-background > .container {
+        background-color: white;
+        padding: 3rem 1.5rem;
+        width: 500px;
+    }
+
+@media (max-width: 767.98px) {
+    .login2-background {
+        font-size: small
+    }
+
+    .btn {
+        width: 100%
+    }
+}
+
+<<<<<<< HEAD
+
+
+/* alinear texto a la derecha */
+.text-end {
+    text-align: right;
+}
+
+/* hacer que un elemento abarque el 100% de alto de pantalla */
+.vh-100 {
+    height: 100vh;
+}
+
+/* Animacion imagenes pop cuando cursor pasa por ellos */
+a > img.pop-up {
+    margin-top: -6rem;
+    border-radius: 50%;
+    position: relative;
+    transition: all .15s ease;
+    border: 4px solid white;
+}
+
+    a > img.pop-up:hover {
+        transform: translate(0, -5%);
+    }
+
+/* Animacion botones pop cuando cursor pasa por ellos */
+.btn {
+    transition: all .15s ease;
+}
+
+    .btn:hover {
+        transform: translate(0, -5%);
+    }
+
+/* Para personalizar inputs de tipo file */
+input[type=file] {
+    display: none;
+}
+/* ****************************************************** */
+
+/* Circular imagenes */
+.img-rounded {
+    border-radius: 50%
+}
+
+/* ****************************************************** */
+/* perfil */
+/* hacer que foto se ponga antes que texto al hacer la pantalla chicha */
+.data-user {
+    order: -1;
+}
+
+.profile-picture {
+    order: 0;
+}
+
+@media (max-width: 991.98px) {
+    .data-user {
+        order: 0;
+    }
+
+    .profile-picture {
+        order: -1;
+    }
+}
+/* ****************************************************** */
+
+
+/* Hacer que las alertas por errores no tengan formato de lista (efectivo en los formularios donde se muestra mayormente altertas)*/
+form > div > small > div > ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+/* ****************************************************** */
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 80%; 
+}
+.small-card {
+    max-width: 400px; /* Establece el ancho máximo de la tarjeta */
+    padding: 20px; /* Ajusta el padding interno */
+    margin: auto; /* Centra la tarjeta */
+}
+

@@ -1,0 +1,38 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Raleway:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+* {
+    /*font-family: 'Raleway', sans-serif;*/
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-image: url('../../Content/img/LoginBackGround.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: lightblue;
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.recuperar-form {
+    margin: 0 auto;
+    /*margin-top: 50px;*/
+    width: 70%;
+}
+
+.btn-form {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.btn-recuperar {
+    width: 60%
+}
+

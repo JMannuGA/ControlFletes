@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    @model WebApplication1.Models.UsuariosLogin
+    @using System.Web.Optimization;
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Sistemas Aguascalientes - Parking</title>
+    @Styles.Render("~/Assets/logincss")
+</head>
+
+<body class="login-form vh-100 login2-background" style="background-image: url('../../Content/img/LoginBackGround.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover; background-color: lightblue;">
+    <div class="container p-0 mx-2">
+        <div class="row justify-content-center">
+            <div class="col-xl-12 col-lg-12 col-md-12">
+                <div class="card border-0 small-card">
+                    <div class="card-body p-0">
+                        <div class="p-4">
+                            <div class="text-center">
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Iniciar sesión</p>
+                            </div>
+                            <form id="LoginForm" action="~/Login" method="post" class="user">
+                                <div class="form-group">
+                                    <label class="form-label">Usuario</label>
+                                    @Html.TextBoxFor(o => o.Correo, new { @Value = Request.Cookies["email"]?.Value ?? "", @class = "form-control", type = "text", placeholder = "Usuario", id = "email", autocomplete = "off" })
+                                    @Html.ValidationMessageFor(o => o.Correo)
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Contraseña</label>
+                                    @Html.PasswordFor(o => o.Password, new { @Value = Request.Cookies["password"]?.Value ?? "", @class = "form-control", placeholder = "Contraseña",  id = "password", onkeypress = "" })
+                                    @Html.ValidationMessageFor(o => o.Password)
+                                    <small class="form-text text-danger">@Html.ValidationSummary(true, "", new { @class = "" })</small>
+                                    <small class="form-text">No compartas tu contraseña con nadie.</small>
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox small">
+                                        <input type="checkbox" class="custom-control-input" id="inputRememberPassword" name="remember" @(Request.Cookies["email"] != null ? "checked" : "")>
+                                        <label class="custom-control-label" for="inputRememberPassword">Recordarme</label>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-block" type="submit">Iniciar sesión</button>
+                                <hr>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/Assets/loginjs")
+
+</body>
+</html>

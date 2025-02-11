@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ae7beb27430a4dcf995a96e28729fcf4" Name="Diagram1">
+        <EntityTypeShape EntityType="FletesModel.Clientes" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FletesModel.Fletes" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FletesModel.Tractos" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <AssociationConnector Association="FletesModel.FK__Fletes__Id_Clien__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="FletesModel.FK__Fletes__Id_Tract__2E1BDC42" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FletesModel.Roles" Width="1.5" PointX="0.75" PointY="15.125" />
+        <EntityTypeShape EntityType="FletesModel.Usuario" Width="1.5" PointX="0.75" PointY="10.375" />
+        <AssociationConnector Association="FletesModel.FK_Fletes_Usuario" />
+        <AssociationConnector Association="FletesModel.FK_Usuario_Roles" />
+        <EntityTypeShape EntityType="FletesModel.MetodosPago" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FletesModel.FacturaPagos" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="FletesModel.Facturas" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FletesModel.Pagos" Width="1.5" PointX="3.375" PointY="7.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

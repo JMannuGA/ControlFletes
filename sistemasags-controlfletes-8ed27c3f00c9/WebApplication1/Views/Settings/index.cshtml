@@ -1,0 +1,104 @@
+﻿@using System.Web.Optimization;
+@{Layout = "~/Views/Shared/_Layout.cshtml";}@{
+    ViewBag.Title = "Perfil";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+@Styles.Render("~/Content/css/Settings.css")
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+            <h2 class="h3 mb-4 page-title">Ajustes</h2>
+            <div class="my-4">
+                <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="content-profile-tab" data-toggle="tab" href="#content-profile" role="tab" aria-controls="content-profile" aria-selected="true">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="content-security-tab" data-toggle="tab" href="#content-security" role="tab" aria-controls="content-security" aria-selected="false">Parametros</a>
+                    </li>
+                </ul>
+
+                <!-- Campo oculto con el correo del usuario desde la sesión -->
+                <input type="hidden" id="correoUsuario" value="@Session["UsuarioCorreo"]" />
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="content-profile" role="tabpanel" aria-labelledby="content-profile-tab">
+                        <!-- Contenido del perfil -->
+                        <h5 class="mb-0 mt-5">Informacion Personal</h5>
+                        <div class="list-group mb-5 shadow">
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-2">Nombre</strong>
+                                        <input type="text" class="form-control" value="" disabled>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button class="btn btn-primary btn-sm">Modificar</button>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-2">Apellido Paterno</strong>
+                                        <input type="text" class="form-control" value="" disabled>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button class="btn btn-primary btn-sm">Modificar</button>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-2">Apellido Materno</strong>
+                                        <input type="text" class="form-control" value="" disabled>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button class="btn btn-primary btn-sm">Modificar</button>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-2">Correo electronico</strong>
+                                        <input type="text" class="form-control" value="" disabled>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button class="btn btn-primary btn-sm">Modificar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Otros elementos del perfil -->
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="content-security" role="tabpanel" aria-labelledby="content-security-tab">
+                        <!-- Contenido de seguridad -->
+                        <h5 class="mb-0 mt-5">Configuración de Seguridad</h5>
+                        <div class="list-group mb-5 shadow">
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-2">Contraseña</strong>
+                                        <input type="password" class="form-control" value="holamod" disabled>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button class="btn btn-primary btn-sm">Modificar</button>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-2">Precio por hora</strong>
+                                        <input type="text" class="form-control" value="" id="precioPorHora">
+                                    </div>
+                                    <div class="col-auto">
+                                        <button class="btn btn-primary btn-sm" id="btnModificarPrecio">Modificar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section scripts{
+        @Scripts.Render("~/Content/js/ajustes.js")
+    }

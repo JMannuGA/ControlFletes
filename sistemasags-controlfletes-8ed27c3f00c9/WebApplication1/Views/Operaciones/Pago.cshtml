@@ -1,0 +1,126 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Crear Pago";
+}
+<div class="container mt-5">
+    <h2 class="text-center">Crear Nuevo Pago</h2>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3" style="display:flex; justify-content:space-between">
+            <h6 class="m-0 font-weight-bold text-primary" style="padding-top:15px">Pagos</h6>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#addPagoGeneralModal">Agregar Pago<i class='fas fa-user-plus'></i></button>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="tablePagos" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Folio</th>
+                            <th>Nombre</th>
+                            <th>Fecha</th>
+                            <th>Monto</th>
+                            <th>Observacion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Folio</th>
+                            <th>Nombre</th>
+                            <th>Fecha</th>
+                            <th>Monto</th>
+                            <th>Observacion</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addPagoGeneralModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="fas fa-plus"></i>Agregar Pago</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="crearPagoForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="Fecha" class="form-label"><i class="fas fa-truck-loading"></i>Fecha</label>
+                                    <input type="date" id="Fecha" class="form-control border-primary">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Cliente" class="form-label"><i class="fas fa-truck-loading"></i>Clientes</label>
+                                    <select id="Cliente" class="form-control border-primary" onchange="GetFacturasPendientes()" required>
+                                        <option value="" disabled selected>...</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Observaciones" class="form-label"><i class="fas fa-truck-loading"></i>Observaciones</label>
+                                    <textarea id="Observaciones" class="form-control border-primary"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="CDB" class="form-label"><i class="fas fa-truck-loading"></i>Cuenta de Banco</label>
+                                    <select id="CDB" class="form-control border-primary" required>
+                                        <option value="" disabled selected>...</option>
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Monto" class="form-label"><i class="fas fa-truck-loading"></i>Monto</label>
+                                    <input type="number" id="Monto" class="form-control border-primary" placeholder="Monto" required>
+                                </div>
+                                <div class="mb-3">
+                                    <button id="apmonbtn" onclick="CalcularMontos()">Aplicar monto</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="VariosPagos" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Factura</th>
+                                        <th>Fecha</th>
+                                        <th>Nombre</th>
+                                        <th>Saldo</th>
+                                        <th>Total</th>
+                                        <th>Abono</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Factura</th>
+                                        <th>Fecha</th>
+                                        <th>Nombre</th>
+                                        <th>Saldo</th>
+                                        <th>Total</th>
+                                        <th>Abono</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="submitFlete">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section js{
+    @Scripts.Render("~/Assets/tablasjs")
+    @Scripts.Render("~/Assets/pagosjs");
+}
+

@@ -1,0 +1,211 @@
+﻿@using System.Web.Optimization;
+
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+
+@section css{
+    @Styles.Render("~/Assets/tablascss")
+}
+
+<!-- Aqui va el contenido-->
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <!-- <h1 class="h3 mb-2 text-gray-800">Tables</h1>-->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3" style="display:flex; justify-content:space-between">
+            <h6 class="m-0 font-weight-bold text-primary" style="padding-top:15px">Reporte de Fletes</h6>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#addFleteModal">Agregar <i class='fas fa-user-plus'></i></button>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id_Flete</th>
+                            <th>Id_Cliente</th>
+                            <th>Cliente</th>
+                            <th>Chofer</th>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                            <th>Precio</th>
+                            <th>Factura</th>
+                            <th>Saldo</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Id_Flete</th>
+                            <th>Id_Cliente</th>
+                            <th>Cliente</th>
+                            <th>Chofer</th>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                            <th>Precio</th>
+                            <th>Factura</th>
+                            <th>Saldo</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addFleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="fas fa-plus"></i>Agregar flete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="crearFleteForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="Id_Tracto" class="form-label"><i class="fas fa-truck-loading"></i>Tracto</label>
+                                    <select id="Id_Tracto" class="form-control border-primary" required>
+                                        <option value="" disabled selected>Selecciona un Tracto</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Id_Cliente" class="form-label"><i class="fas fa-truck-loading"></i>Cliente</label>
+                                    <select id="Id_Cliente" class="form-control border-primary" required>
+                                        <option value="" disabled selected>Selecciona un Cliente</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Origen" class="form-label"><i class="fas fa-truck-loading"></i>Origen</label>
+                                    <input type="text" id="Origen" class="form-control border-primary" placeholder="Origen" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Precio" class="form-label"><i class="fas fa-truck-loading"></i>Precio</label>
+                                    <input type="number" id="Precio" class="form-control border-primary" placeholder="Precio" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="Toneladas" class="form-label"><i class="fas fa-truck-loading"></i>Toneladas</label>
+                                    <input type="number" id="Toneladas" class="form-control border-primary" placeholder="Cantidad de Toneladas" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Id_Usuario" class="form-label"><i class="fas fa-truck-loading"></i>Chofer</label>
+                                    <select id="Id_Usuario" class="form-control border-primary" required>
+                                        <option value="" disabled selected>Selecciona un Chofer</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Destino" class="form-label"><i class="fas fa-truck-loading"></i>Destino</label>
+                                    <input type="text" id="Destino" class="form-control border-primary" placeholder="Destino" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Pago" class="form-label"><i class="fas fa-truck-loading"></i>Pago</label>
+                                    <input type="number" id="Pago" class="form-control border-primary" placeholder="Pago" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="Factura" class="form-label"><i class="fas fa-truck-loading"></i>Factura</label>
+                                    <input type="text" id="Factura" class="form-control border-primary" placeholder="Número de Factura" required>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="submitFlete">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addPagoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="fas fa-plus"></i>Agregar Pago</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="crearPagoForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="Fecha" class="form-label"><i class="fas fa-truck-loading"></i>Fecha</label>
+                                    <input type="date" id="Fecha" class="form-control border-primary">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="FDP" class="form-label"><i class="fas fa-truck-loading"></i>Forma de Pago</label>
+                                    <select id="FDP" class="form-control border-primary" required>
+                                        <option value="" disabled selected>...</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="hidden" id="Factura" value="">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Observaciones" class="form-label"><i class="fas fa-truck-loading"></i>Observaciones</label>
+                                    <textarea id="Observaciones" class="form-control border-primary"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="Monto" class="form-label"><i class="fas fa-truck-loading"></i>Monto</label>
+                                    <input type="number" id="Monto" class="form-control border-primary" placeholder="Monto" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="CDB" class="form-label"><i class="fas fa-truck-loading"></i>Cuenta de Banco</label>
+                                    <select id="CDB" class="form-control border-primary" required>
+                                        <option value="" disabled selected>...</option>
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="historialPagos" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Folio</th>
+                                <th>Monto</th>
+                                <th>Forma de Pago</th>
+                                <th>Cuenta de Banco</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Folio</th>
+                                <th>Monto</th>
+                                <th>Forma de Pago</th>
+                                <th>Cuenta de Banco</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="submitFlete" onclick="AgregarPago()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+<!-- Aqui termina contenido-->
+
+@section js{
+    @Scripts.Render("~/Assets/tablasjs")
+    @Scripts.Render("~/Assets/reportejs")
+    @Scripts.Render("~/Content/js/script.js")
+
+}

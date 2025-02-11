@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Sistemas Aguascalientes - Parking</title>
+    <link type="text/css" href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css/ForgetPW.css")
+</head>
+
+<body class="vh-100 login2-background">
+    <div class="recuperar-form container">
+        <div class="row justify-content-center">
+            <div class="col-xl-12 col-lg-12 col-md-12">
+                <div class="card border-0">
+                    <div class="card-body p-0">
+                        <div class="p-5">
+                            <h4 class="text-center mb-4">Recuperar Contraseña</h4>
+                            @if (ViewBag.ShowPasswordFields == null || !(bool)ViewBag.ShowPasswordFields)
+                            {
+                                using (Html.BeginForm("ValidateUser", "Login", FormMethod.Post))
+                                {
+                                    <div class="mb-3">
+                                        <label for="correo" class="form-label">Nombre de Usuario</label>
+                                        @Html.TextBox("correo", "", new { @class = "form-control", id = "correo" })
+                                    </div>
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">Validar Usuario</button>
+                                    </div>
+                                }
+                            }
+
+                            @if (ViewBag.ErrorMessage != null)
+                            {
+                                <div class="alert alert-danger mt-3">
+                                    @ViewBag.ErrorMessage
+                                </div>
+                            }
+
+                            @if (ViewBag.ShowPasswordFields != null && (bool)ViewBag.ShowPasswordFields)
+                            {
+                                using (Html.BeginForm("ChangePassword", "Login", FormMethod.Post))
+                                {
+                                    @Html.Hidden("correo", Session["UsuarioCorreo"] as string)
+                                    <div class="mb-3">
+                                        <label for="NewP" class="form-label">Nueva Contraseña</label>
+                                        <input type="password" class="form-control" id="NewP" name="NewP" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ConfP" class="form-label">Confirmar Nueva Contraseña</label>
+                                        <input type="password" class="form-control" id="ConfP" name="ConfP" required>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">Cambiar Contraseña</button>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/Assets/RecuperarPassword")
+</body>
+
+
+</html>

@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FletesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="Id_Cliente" />
+          </Key>
+          <Property Name="Id_Cliente" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="nombre_comercial" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FacturaPagos">
+          <Key>
+            <PropertyRef Name="id_FacturaPagos" />
+          </Key>
+          <Property Name="id_FacturaPagos" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="id_Facturas" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="id_Pagos" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Monto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SaldoNuevo" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MetodoPago" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SaldoAnterior" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="id_Facturas" />
+          </Key>
+          <Property Name="id_Facturas" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Folio" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha" Type="varchar" MaxLength="19" />
+          <Property Name="FormaPago" Type="varchar" MaxLength="2" />
+          <Property Name="id_Cliente" Type="uniqueidentifier" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MetodoPago" Type="varchar" MaxLength="3" />
+          <Property Name="Saldo" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Fletes">
+          <Key>
+            <PropertyRef Name="Id_Flete" />
+          </Key>
+          <Property Name="Id_Flete" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id_Tracto" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id_Usuario" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id_Cliente" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Destino" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Origen" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Toneladas" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Factura" Type="varchar" MaxLength="50" />
+          <Property Name="Pago" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MetodosPago">
+          <Key>
+            <PropertyRef Name="id_MetodoPago" />
+          </Key>
+          <Property Name="id_MetodoPago" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Clave" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pagos">
+          <Key>
+            <PropertyRef Name="id_Pago" />
+          </Key>
+          <Property Name="id_Pago" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Monto" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fecha_Pago" Type="varchar(max)" />
+          <Property Name="Forma_Pago" Type="varchar(max)" />
+          <Property Name="Observaciones" Type="varchar(max)" />
+          <Property Name="Folio_Pago" Type="int" />
+          <Property Name="Cuenta_Banco" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Rol" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tractos">
+          <Key>
+            <PropertyRef Name="Id_Tracto" />
+          </Key>
+          <Property Name="Id_Tracto" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Marca" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Placa" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Numero" Type="int" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id_Usuario" />
+          </Key>
+          <Property Name="Id_Usuario" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Comision" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Apellido01" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Apellido02" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="RolId" Type="uniqueidentifier" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Fletes__Id_Clien__440B1D61">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Fletes" Type="Self.Fletes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Id_Cliente" />
+            </Principal>
+            <Dependent Role="Fletes">
+              <PropertyRef Name="Id_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fletes__Id_Tract__4316F928">
+          <End Role="Tractos" Type="Self.Tractos" Multiplicity="1" />
+          <End Role="Fletes" Type="Self.Fletes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tractos">
+              <PropertyRef Name="Id_Tracto" />
+            </Principal>
+            <Dependent Role="Fletes">
+              <PropertyRef Name="Id_Tracto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fletes_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Fletes" Type="Self.Fletes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id_Usuario" />
+            </Principal>
+            <Dependent Role="Fletes">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FletesModelStoreContainer">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacturaPagos" EntityType="Self.FacturaPagos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fletes" EntityType="Self.Fletes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MetodosPago" EntityType="Self.MetodosPago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pagos" EntityType="Self.Pagos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tractos" EntityType="Self.Tractos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Fletes__Id_Clien__440B1D61" Association="Self.FK__Fletes__Id_Clien__440B1D61">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Fletes" EntitySet="Fletes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fletes__Id_Tract__4316F928" Association="Self.FK__Fletes__Id_Tract__4316F928">
+            <End Role="Tractos" EntitySet="Tractos" />
+            <End Role="Fletes" EntitySet="Fletes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fletes_Usuario" Association="Self.FK_Fletes_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Fletes" EntitySet="Fletes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Roles" Association="Self.FK_Usuario_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FletesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="Id_Cliente" />
+          </Key>
+          <Property Name="Id_Cliente" Type="Guid" Nullable="false" />
+          <Property Name="nombre_comercial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Fletes" Relationship="Self.FK__Fletes__Id_Clien__300424B4" FromRole="Clientes" ToRole="Fletes" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fletes">
+          <Key>
+            <PropertyRef Name="Id_Flete" />
+          </Key>
+          <Property Name="Id_Flete" Type="Guid" Nullable="false" />
+          <Property Name="Id_Tracto" Type="Guid" Nullable="false" />
+          <Property Name="Id_Cliente" Type="Guid" Nullable="false" />
+          <Property Name="Destino" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Origen" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Toneladas" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Factura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pago" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Fletes__Id_Clien__300424B4" FromRole="Fletes" ToRole="Clientes" />
+          <NavigationProperty Name="Tractos" Relationship="Self.FK__Fletes__Id_Tract__2E1BDC42" FromRole="Fletes" ToRole="Tractos" />
+          <Property Name="Id_Usuario" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="FletesModel.FK_Fletes_Usuario" FromRole="Fletes" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Tractos">
+          <Key>
+            <PropertyRef Name="Id_Tracto" />
+          </Key>
+          <Property Name="Id_Tracto" Type="Guid" Nullable="false" />
+          <Property Name="Marca" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Placa" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Numero" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Fletes" Relationship="Self.FK__Fletes__Id_Tract__2E1BDC42" FromRole="Tractos" ToRole="Fletes" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Fletes__Id_Clien__300424B4">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Fletes" Type="Self.Fletes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Id_Cliente" />
+            </Principal>
+            <Dependent Role="Fletes">
+              <PropertyRef Name="Id_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fletes__Id_Tract__2E1BDC42">
+          <End Role="Tractos" Type="Self.Tractos" Multiplicity="1" />
+          <End Role="Fletes" Type="Self.Fletes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tractos">
+              <PropertyRef Name="Id_Tracto" />
+            </Principal>
+            <Dependent Role="Fletes">
+              <PropertyRef Name="Id_Tracto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FletesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+          <EntitySet Name="Fletes" EntityType="Self.Fletes" />
+          <EntitySet Name="Tractos" EntityType="Self.Tractos" />
+          <AssociationSet Name="FK__Fletes__Id_Clien__300424B4" Association="Self.FK__Fletes__Id_Clien__300424B4">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Fletes" EntitySet="Fletes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fletes__Id_Tract__2E1BDC42" Association="Self.FK__Fletes__Id_Tract__2E1BDC42">
+            <End Role="Tractos" EntitySet="Tractos" />
+            <End Role="Fletes" EntitySet="Fletes" />
+          </AssociationSet>
+          <EntitySet Name="Roles" EntityType="FletesModel.Roles" />
+          <EntitySet Name="Usuario" EntityType="FletesModel.Usuario" />
+          <AssociationSet Name="FK_Fletes_Usuario" Association="FletesModel.FK_Fletes_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Fletes" EntitySet="Fletes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Roles" Association="FletesModel.FK_Usuario_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <EntitySet Name="MetodosPago" EntityType="FletesModel.MetodosPago" />
+          <EntitySet Name="FacturaPagos" EntityType="FletesModel.FacturaPagos" />
+          <EntitySet Name="Facturas" EntityType="FletesModel.Facturas" />
+          <EntitySet Name="Pagos" EntityType="FletesModel.Pagos" />
+        </EntityContainer>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Rol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Usuario" Relationship="FletesModel.FK_Usuario_Roles" FromRole="Roles" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id_Usuario" />
+          </Key>
+          <Property Name="Id_Usuario" Type="Guid" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Comision" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="Apellido01" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido02" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Correo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RolId" Type="Guid" />
+          <NavigationProperty Name="Fletes" Relationship="FletesModel.FK_Fletes_Usuario" FromRole="Usuario" ToRole="Fletes" />
+          <NavigationProperty Name="Roles" Relationship="FletesModel.FK_Usuario_Roles" FromRole="Usuario" ToRole="Roles" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Fletes_Usuario">
+          <End Type="FletesModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="FletesModel.Fletes" Role="Fletes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id_Usuario" />
+            </Principal>
+            <Dependent Role="Fletes">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Roles">
+          <End Type="FletesModel.Roles" Role="Roles" Multiplicity="0..1" />
+          <End Type="FletesModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MetodosPago">
+          <Key>
+            <PropertyRef Name="id_MetodoPago" />
+          </Key>
+          <Property Name="id_MetodoPago" Type="Guid" Nullable="false" />
+          <Property Name="Clave" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FacturaPagos">
+          <Key>
+            <PropertyRef Name="id_FacturaPagos" />
+          </Key>
+          <Property Name="id_FacturaPagos" Type="Guid" Nullable="false" />
+          <Property Name="id_Facturas" Type="Guid" Nullable="false" />
+          <Property Name="id_Pagos" Type="Guid" Nullable="false" />
+          <Property Name="Monto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SaldoNuevo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MetodoPago" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SaldoAnterior" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="id_Facturas" />
+          </Key>
+          <Property Name="id_Facturas" Type="Guid" Nullable="false" />
+          <Property Name="Folio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="String" MaxLength="19" FixedLength="false" Unicode="false" />
+          <Property Name="FormaPago" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="id_Cliente" Type="Guid" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MetodoPago" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Saldo" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Pagos">
+          <Key>
+            <PropertyRef Name="id_Pago" />
+          </Key>
+          <Property Name="id_Pago" Type="Guid" Nullable="false" />
+          <Property Name="Monto" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fecha_Pago" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Forma_Pago" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Folio_Pago" Type="Int32" />
+          <Property Name="Cuenta_Banco" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FletesModelStoreContainer" CdmEntityContainer="FletesEntities">
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="FletesModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
+                <ScalarProperty Name="nombre_comercial" ColumnName="nombre_comercial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fletes">
+            <EntityTypeMapping TypeName="FletesModel.Fletes">
+              <MappingFragment StoreEntitySet="Fletes">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Id_Flete" ColumnName="Id_Flete" />
+                <ScalarProperty Name="Id_Tracto" ColumnName="Id_Tracto" />
+                <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
+                <ScalarProperty Name="Destino" ColumnName="Destino" />
+                <ScalarProperty Name="Origen" ColumnName="Origen" />
+                <ScalarProperty Name="Toneladas" ColumnName="Toneladas" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Factura" ColumnName="Factura" />
+                <ScalarProperty Name="Pago" ColumnName="Pago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tractos">
+            <EntityTypeMapping TypeName="FletesModel.Tractos">
+              <MappingFragment StoreEntitySet="Tractos">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Id_Tracto" ColumnName="Id_Tracto" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Placa" ColumnName="Placa" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="FletesModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="FletesModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Apellido02" ColumnName="Apellido02" />
+                <ScalarProperty Name="Apellido01" ColumnName="Apellido01" />
+                <ScalarProperty Name="Comision" ColumnName="Comision" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MetodosPago">
+            <EntityTypeMapping TypeName="FletesModel.MetodosPago">
+              <MappingFragment StoreEntitySet="MetodosPago">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="id_MetodoPago" ColumnName="id_MetodoPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacturaPagos">
+            <EntityTypeMapping TypeName="FletesModel.FacturaPagos">
+              <MappingFragment StoreEntitySet="FacturaPagos">
+                <ScalarProperty Name="SaldoAnterior" ColumnName="SaldoAnterior" />
+                <ScalarProperty Name="MetodoPago" ColumnName="MetodoPago" />
+                <ScalarProperty Name="SaldoNuevo" ColumnName="SaldoNuevo" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="id_Pagos" ColumnName="id_Pagos" />
+                <ScalarProperty Name="id_Facturas" ColumnName="id_Facturas" />
+                <ScalarProperty Name="id_FacturaPagos" ColumnName="id_FacturaPagos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturas">
+            <EntityTypeMapping TypeName="FletesModel.Facturas">
+              <MappingFragment StoreEntitySet="Facturas">
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="MetodoPago" ColumnName="MetodoPago" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="id_Cliente" ColumnName="id_Cliente" />
+                <ScalarProperty Name="FormaPago" ColumnName="FormaPago" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="id_Facturas" ColumnName="id_Facturas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pagos">
+            <EntityTypeMapping TypeName="FletesModel.Pagos">
+              <MappingFragment StoreEntitySet="Pagos">
+                <ScalarProperty Name="Cuenta_Banco" ColumnName="Cuenta_Banco" />
+                <ScalarProperty Name="Folio_Pago" ColumnName="Folio_Pago" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="Forma_Pago" ColumnName="Forma_Pago" />
+                <ScalarProperty Name="Fecha_Pago" ColumnName="Fecha_Pago" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="id_Pago" ColumnName="id_Pago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

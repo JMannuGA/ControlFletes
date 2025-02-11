@@ -1,0 +1,152 @@
+﻿@using System.Web.Optimization;
+
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+
+@section css{
+    @Styles.Render("~/Assets/tablascss")
+}
+<head>
+    <style>
+        .table th:last-child,
+        .table td:last-child {
+            width: 1%;
+            white-space: nowrap;
+        }
+
+        .table td,
+        .table th {
+            padding: 0.3rem;
+            vertical-align: middle;
+        }
+
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            line-height: 1;
+        }
+    </style>
+</head>
+
+<div class="container-fluid">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3" style="display:flex; justify-content:space-between">
+            <h6 class="m-0 font-weight-bold text-primary" style="padding-top:15px">Reporte de Tractos</h6>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#addTractoModal">Agregar <i class='fas fa-user-plus'></i></button>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm" id="tableTractos" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Marca</th>
+                            <th>Placa</th>
+                            <th>Numero</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Marca</th>
+                            <th>Placa</th>
+                            <th>Numero</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addTractoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="fas fa-plus"></i>Agregar tracto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="crearTractoForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="Marca" class="form-label"><i class="fas fa-truck-loading"></i>Marca</label>
+                                    <input type="text" id="Marca" class="form-control border-primary" placeholder="Marca" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Placa" class="form-label"><i class="fas fa-truck-loading"></i>Placa</label>
+                                    <input type="number" id="Placa" class="form-control border-primary" placeholder="Placa" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="Numero" class="form-label"><i class="fas fa-truck-loading"></i>Numero</label>
+                                    <input type="number" id="Numero" class="form-control border-primary" placeholder="" required>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="AgregarTractos()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editTractoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="fas fa-edit"></i> Editar Tracto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editarTractoForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="EditMarca" class="form-label"><i class="fas fa-truck-loading"></i> Marca</label>
+                                    <input type="text" id="EditMarca" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="EditPlaca" class="form-label"><i class="fas fa-truck-loading"></i> Placa</label>
+                                    <input type="number" id="EditPlaca" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="EditNumero" class="form-label"><i class="fas fa-truck-loading"></i> Numero</label>
+                                    <input type="number" id="EditNumero" class="form-control " required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="EditActivo">Estado</label>
+                                    <select id="EditActivo" class="form-control">
+                                        <option value="true">Activo</option>
+                                        <option value="false">Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-warning" onclick="EditarTracto()">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section js{
+    @Scripts.Render("~/Assets/tablasjs")
+    @Scripts.Render("~/Assets/tractosjs")
+}

@@ -1,0 +1,242 @@
+﻿@using System.Web.Optimization;
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+@section css{
+    @Styles.Render("~/Assets/tablascss")
+}
+
+<head>
+    <style>
+        .table th:last-child,
+        .table td:last-child {
+            width: 1%;
+            white-space: nowrap;
+        }
+
+        .table td,
+        .table th {
+            padding: 0.3rem; 
+            vertical-align: middle; 
+        }
+
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            line-height: 1;
+        }
+        .text-center {
+            text-align: center !important;
+        }
+        .estado-activo {
+            color: green;
+            font-weight: bold;
+        }
+
+        .estado-inactivo {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Usuarios por Rol</h6>
+        </div>
+        <br />
+        <nav style="display:flex; justify-content:space-between">
+            <div class="nav nav-tabs">
+                <button class="nav-link active" id="admin-tab" data-toggle="tab" data-target="#pestana-admin">Administradores</button>
+                <button class="nav-link" id="choferes-tab" data-toggle="tab" data-target="#pestana-choferes">Choferes</button>
+                <button class="nav-link" id="facturacion-tab" data-toggle="tab" data-target="#pestana-facturacion">Facturación</button>
+            </div>
+            <div style="padding-right:2%">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">Agregar <i class='fas fa-user-plus'></i></button>
+            </div>
+        </nav>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="tab-content" id="nav-tabContent">
+
+                    <div class="tab-pane fade show active" id="pestana-admin">
+                        <table id="adminTable" class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Apellido Paterno</th>
+                                    <th>Apellido Materno</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane fade" id="pestana-choferes">
+                        <table id="choferTable" class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Apellido Paterno</th>
+                                    <th>Apellido Materno</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane fade" id="pestana-facturacion">
+                        <table id="facturacionTable" class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Apellido Paterno</th>
+                                    <th>Apellido Materno</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="fas fa-user-plus"></i> Registrar Usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="form1Example1c">Nombre</label>
+                                    <input type="text" id="form1Example1c" class="form-control" placeholder="Ingresa el nombre" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="form2Example1c">Apellido Paterno</label>
+                                    <input type="text" id="form2Example1c" class="form-control" placeholder="Ingresa el apellido paterno" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="form3Example1c">Apellido Materno</label>
+                                    <input type="text" id="form3Example1c" class="form-control" placeholder="Ingresa el apellido materno" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="formRole">Rol</label>
+                                    <select id="formRole" class="form-control">
+                                        <option value="Admin">Admin</option>
+                                        <option value="Chofer">Chofer</option>
+                                        <option value="Facturacion">Facturación</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="form4Example1c">Correo Electrónico</label>
+                                    <input type="email" id="form4Example1c" class="form-control" placeholder="ejemplo@correo.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="formPhone">Teléfono</label>
+                                    <input type="tel" id="formPhone" class="form-control" placeholder="123-456-7890" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="formPassword">Contraseña</label>
+                                    <input type="password" id="formPassword" class="form-control" placeholder="Ingresa la contraseña" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="formRepeatPassword">Repite la contraseña</label>
+                                    <input type="password" id="formRepeatPassword" class="form-control" placeholder="Confirma la contraseña" required>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="validarFormulario()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="fas fa-edit"></i> Editar Usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editUserForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="EditNombre">Nombre</label>
+                                    <input type="text" id="EditNombre" class="form-control" placeholder="Ingresa el nombre" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="EditApellido01">Apellido Paterno</label>
+                                    <input type="text" id="EditApellido01" class="form-control" placeholder="Ingresa el apellido paterno" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="EditApellido02">Apellido Materno</label>
+                                    <input type="text" id="EditApellido02" class="form-control" placeholder="Ingresa el apellido materno" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="EditCorreo">Correo Electrónico</label>
+                                    <input type="email" id="EditCorreo" class="form-control" placeholder="ejemplo@correo.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="EditTelefono">Teléfono</label>
+                                    <input type="tel" id="EditTelefono" class="form-control" placeholder="123-456-7890" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="EditActivo">Estado</label>
+                                    <select id="EditActivo" class="form-control">
+                                        <option value="true">Activo</option>
+                                        <option value="false">Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="EditarUsuario()">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    @section js {
+        @Scripts.Render("~/Assets/tablasjs")
+        @Scripts.Render("~/Assets/usuariojs")
+        @Scripts.Render("~/Assets/Registrarjs")
+
+    }
